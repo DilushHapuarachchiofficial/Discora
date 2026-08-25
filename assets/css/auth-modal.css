@@ -1,0 +1,596 @@
+/**
+ * Discora - Authentication Modal (Login & Registration Popup) Stylesheet
+ * Premium Dark Gaming Aesthetic, Responsive & GSAP Animation Ready
+ */
+
+/* -------------------------------------------------------------
+   1. Modal Overlay & Container
+   ------------------------------------------------------------- */
+.discora-auth-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 1080;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), visibility 0.3s;
+}
+
+.discora-auth-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Modal Window */
+.discora-auth-modal {
+    position: relative;
+    width: 100%;
+    max-width: 980px;
+    max-height: 92vh;
+    background-color: #0b0d14;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 24px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.95), 0 0 50px rgba(0, 112, 209, 0.15);
+    overflow: hidden;
+    transform: scale(0.92);
+    opacity: 0;
+}
+
+/* Close Button */
+.auth-modal-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #cbd5e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    z-index: 20;
+    transition: all 0.25s ease;
+}
+
+.auth-modal-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    transform: rotate(90deg) scale(1.05);
+}
+
+/* -------------------------------------------------------------
+   2. Two-Column Grid Layout
+   ------------------------------------------------------------- */
+.auth-modal-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1.25fr;
+    min-height: 580px;
+    max-height: 92vh;
+}
+
+/* -------------------------------------------------------------
+   3. Left Column: Gaming Visual Pane
+   ------------------------------------------------------------- */
+.auth-visual-pane {
+    position: relative;
+    background: #06070a url('../images/banners/auth-gaming-banner.png') center center / cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 3rem 2.25rem 2.5rem;
+    overflow: hidden;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.auth-visual-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(8, 10, 16, 0.45) 0%, rgba(8, 10, 16, 0.85) 60%, #080a10 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.auth-visual-content {
+    position: relative;
+    z-index: 2;
+}
+
+.auth-brand-badge {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1.85rem;
+    text-align: center;
+}
+
+.auth-brand-logo {
+    height: 72px;
+    max-height: 78px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 18px rgba(0, 112, 209, 0.6));
+    transition: transform 0.3s ease;
+}
+
+.auth-brand-logo:hover {
+    transform: scale(1.06);
+}
+
+.auth-gaming-badge {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(0, 112, 209, 0.15);
+    border: 1px solid rgba(0, 112, 209, 0.4);
+    color: #38bdf8;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.35rem 0.85rem;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+}
+
+.auth-visual-title {
+    color: #ffffff;
+    font-size: 1.85rem;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.85rem;
+}
+
+.text-gradient-ps {
+    background: linear-gradient(135deg, #38bdf8 0%, #0070d1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.auth-visual-desc {
+    color: #94a3b8;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+/* Feature List in Visual */
+.auth-features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-bottom: 1.8rem;
+}
+
+.auth-feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: #e2e8f0;
+    font-size: 0.84rem;
+    font-weight: 500;
+}
+
+.auth-feature-item i {
+    font-size: 1rem;
+}
+
+/* Platform Badges */
+.auth-visual-footer {
+    display: flex;
+    gap: 0.65rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.platform-badge {
+    font-size: 0.76rem;
+    font-weight: 600;
+    padding: 0.3rem 0.75rem;
+    border-radius: 6px;
+}
+
+.ps-badge {
+    background: rgba(0, 112, 209, 0.2);
+    color: #60a5fa;
+    border: 1px solid rgba(0, 112, 209, 0.35);
+}
+
+.xbox-badge {
+    background: rgba(16, 124, 16, 0.2);
+    color: #4ade80;
+    border: 1px solid rgba(16, 124, 16, 0.35);
+}
+
+/* -------------------------------------------------------------
+   4. Right Column: Authentication Form Area
+   ------------------------------------------------------------- */
+.auth-form-pane {
+    background: #0b0d14;
+    padding: 3rem 2.75rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+/* Form Headings */
+.auth-subtitle {
+    color: #0070d1;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.auth-title {
+    color: #ffffff;
+    font-size: 1.9rem;
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.5px;
+}
+
+.auth-desc {
+    font-size: 0.875rem;
+    color: #8e95a5 !important;
+    line-height: 1.5;
+}
+
+/* -------------------------------------------------------------
+   5. Form Controls & Floating Style
+   ------------------------------------------------------------- */
+.auth-label {
+    display: block;
+    color: #cbd5e1;
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+.auth-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.auth-input-wrapper .input-icon {
+    position: absolute;
+    left: 14px;
+    color: #64748b;
+    font-size: 1.1rem;
+    pointer-events: none;
+    transition: color 0.2s ease;
+}
+
+.auth-input {
+    width: 100%;
+    background-color: #06070c;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 0.92rem;
+    padding: 0.72rem 1rem 0.72rem 2.65rem;
+    transition: all 0.25s ease;
+}
+
+.auth-input:focus {
+    background-color: #080a12;
+    border-color: #0070d1;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 112, 209, 0.22);
+}
+
+.auth-input:focus + .input-icon,
+.auth-input-wrapper:focus-within .input-icon {
+    color: #0070d1;
+}
+
+.auth-input::placeholder {
+    color: #475569;
+    font-size: 0.86rem;
+}
+
+.auth-input.is-invalid {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.18) !important;
+}
+
+.auth-field-error {
+    color: #f87171;
+    font-size: 0.78rem;
+    font-weight: 500;
+    margin-top: 0.35rem;
+    min-height: 18px;
+    display: none;
+}
+
+.auth-field-error.show {
+    display: block;
+}
+
+/* Password Toggle Button */
+.btn-password-toggle {
+    position: absolute;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: #64748b;
+    font-size: 1.05rem;
+    padding: 6px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-password-toggle:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Checkbox & Subtle Links */
+.auth-checkbox .form-check-input {
+    background-color: #06070c;
+    border-color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    width: 1.05rem;
+    height: 1.05rem;
+}
+
+.auth-checkbox .form-check-input:checked {
+    background-color: #0070d1;
+    border-color: #0070d1;
+}
+
+.auth-checkbox .form-check-label {
+    color: #94a3b8;
+    font-size: 0.82rem;
+    cursor: pointer;
+    user-select: none;
+    padding-left: 0.25rem;
+}
+
+.auth-link-subtle {
+    color: #64748b;
+    font-size: 0.8rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.auth-link-subtle:hover {
+    color: #0070d1;
+    text-decoration: underline;
+}
+
+/* -------------------------------------------------------------
+   6. Primary Submit Button
+   ------------------------------------------------------------- */
+.btn-auth-primary {
+    background: linear-gradient(135deg, #0070d1 0%, #00439c 100%);
+    border: none;
+    border-radius: 12px;
+    color: #ffffff;
+    font-family: var(--font-heading, 'Rajdhani', sans-serif);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    padding: 0.78rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(0, 112, 209, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.btn-auth-primary:hover {
+    background: linear-gradient(135deg, #0084f7 0%, #0056a3 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 112, 209, 0.6);
+}
+
+.btn-auth-primary:active {
+    transform: translateY(0);
+}
+
+.btn-auth-primary:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Switch Tabs Button */
+.btn-switch-tab {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-switch-tab:hover {
+    text-decoration: underline;
+    transform: translateX(2px);
+}
+
+/* -------------------------------------------------------------
+   7. Alert Messages Inside Modal
+   ------------------------------------------------------------- */
+.auth-alert {
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    font-size: 0.86rem;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    border: 1px solid transparent;
+}
+
+.auth-alert.auth-alert-danger {
+    background-color: rgba(239, 68, 68, 0.12);
+    border-color: rgba(239, 68, 68, 0.35);
+    color: #fca5a5;
+}
+
+.auth-alert.auth-alert-success {
+    background-color: rgba(34, 197, 94, 0.12);
+    border-color: rgba(34, 197, 94, 0.35);
+    color: #86efac;
+}
+
+.auth-alert.auth-alert-warning {
+    background-color: rgba(234, 179, 8, 0.12);
+    border-color: rgba(234, 179, 8, 0.35);
+    color: #fde047;
+}
+
+/* -------------------------------------------------------------
+   8. Form Transition View Container
+   ------------------------------------------------------------- */
+.auth-form-view {
+    width: 100%;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* -------------------------------------------------------------
+   9. Responsive Design & Media Queries
+   ------------------------------------------------------------- */
+@media (max-width: 991.98px) {
+    .discora-auth-modal {
+        max-width: 760px;
+    }
+    
+    .auth-modal-grid {
+        grid-template-columns: 1fr 1.35fr;
+    }
+
+    .auth-visual-pane {
+        padding: 2.5rem 1.75rem 2rem;
+    }
+
+    .auth-form-pane {
+        padding: 2.5rem 2rem;
+    }
+
+    .auth-title {
+        font-size: 1.7rem;
+    }
+
+    .auth-visual-title {
+        font-size: 1.55rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .discora-auth-overlay {
+        padding: 0.75rem;
+    }
+
+    .discora-auth-modal {
+        max-width: 520px;
+        max-height: 94vh;
+        border-radius: 20px;
+    }
+
+    .auth-modal-grid {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    /* Transform Left Visual Pane into a compact stylish header on mobile */
+    .auth-visual-pane {
+        padding: 2rem 1.5rem 1.5rem;
+        min-height: 160px;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .auth-visual-desc,
+    .auth-features-list,
+    .auth-visual-footer {
+        display: none;
+    }
+
+    .auth-visual-title {
+        font-size: 1.35rem;
+        margin-bottom: 0;
+    }
+
+    .auth-gaming-badge {
+        margin-bottom: 0.5rem;
+    }
+
+    .auth-form-pane {
+        padding: 1.75rem 1.5rem 2rem;
+    }
+
+    .auth-title {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .discora-auth-overlay {
+        padding: 0.5rem;
+    }
+
+    .discora-auth-modal {
+        max-height: 96vh;
+        border-radius: 16px;
+    }
+
+    .auth-visual-pane {
+        padding: 1.5rem 1.25rem 1.25rem;
+        min-height: 130px;
+    }
+
+    .auth-brand-logo {
+        height: 38px;
+    }
+
+    .auth-form-pane {
+        padding: 1.5rem 1.15rem 1.75rem;
+    }
+
+    .auth-title {
+        font-size: 1.45rem;
+    }
+
+    .auth-input {
+        font-size: 0.88rem;
+        padding: 0.65rem 0.85rem 0.65rem 2.4rem;
+    }
+
+    .auth-modal-close {
+        top: 12px;
+        right: 12px;
+        width: 34px;
+        height: 34px;
+        font-size: 0.95rem;
+    }
+}

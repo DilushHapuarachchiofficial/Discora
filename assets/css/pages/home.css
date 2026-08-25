@@ -1,0 +1,252 @@
+/**
+ * Discora - Homepage Dedicated Stylesheet
+ */
+
+/* -------------------------------------------------------------
+   1. Hero Banner Section
+   ------------------------------------------------------------- */
+.hero-section {
+    position: relative;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    background-color: #000000;
+    overflow: hidden;
+    padding: 6rem 0;
+}
+
+.hero-background-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right center;
+}
+
+.hero-gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0.88) 42%, rgba(0, 0, 0, 0.4) 75%, rgba(0, 0, 0, 0.6) 100%);
+    z-index: 2;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    max-width: 660px;
+}
+
+.hero-title {
+    font-size: clamp(2.3rem, 5.5vw, 4.2rem);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: 1px;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.15rem, 2.3vw, 1.75rem);
+    font-weight: 600;
+    color: #e2e8f0;
+    line-height: 1.35;
+}
+
+/* -------------------------------------------------------------
+   2. New Arrivals Horizontal Carousel Section (White Section)
+   ------------------------------------------------------------- */
+.new-arrivals-section {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 6rem 0;
+    overflow: hidden;
+}
+
+.section-headline {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    line-height: 1.15;
+}
+
+.section-desc-light {
+    color: #4b5563;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.section-desc-dark {
+    color: #cbd5e1;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+/* Carousel Container & Controls */
+.carousel-outer-wrapper {
+    position: relative;
+    padding: 1rem 0;
+}
+
+.carousel-viewport {
+    overflow: hidden;
+    width: 100%;
+    border-radius: 16px;
+    position: relative;
+    padding: 10px 4px 16px 4px;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 1.75rem;
+    transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+}
+
+.carousel-item-wrapper {
+    flex: 0 0 calc(25% - 1.3125rem);
+    min-width: 240px;
+    height: 100%;
+}
+
+@media (max-width: 1199px) {
+    .carousel-item-wrapper {
+        flex: 0 0 calc(33.333% - 1.166rem);
+    }
+}
+
+@media (max-width: 991px) {
+    .carousel-item-wrapper {
+        flex: 0 0 calc(50% - 0.875rem);
+    }
+}
+
+@media (max-width: 767px) {
+    .carousel-item-wrapper {
+        flex: 0 0 100%;
+    }
+}
+
+.carousel-btn-prev,
+.carousel-btn-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 46px;
+    height: 46px;
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+    transition: var(--transition-smooth);
+}
+
+.carousel-btn-prev {
+    left: -22px;
+}
+
+.carousel-btn-next {
+    right: -22px;
+}
+
+.carousel-btn-prev:hover,
+.carousel-btn-next:hover {
+    background-color: #374151;
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* -------------------------------------------------------------
+   3. PlayStation Showcase Section (Dark Section)
+   ------------------------------------------------------------- */
+.playstation-section {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 6.5rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.ps-ambient-glow {
+    position: absolute;
+    top: 20%;
+    left: -10%;
+    width: 550px;
+    height: 550px;
+    background: radial-gradient(circle, rgba(0, 112, 209, 0.25) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.ps-showcase-img {
+    filter: drop-shadow(0 18px 40px rgba(0, 112, 209, 0.35));
+    max-height: 440px;
+    width: auto;
+}
+
+/* -------------------------------------------------------------
+   4. Xbox Showcase Section (White Section)
+   ------------------------------------------------------------- */
+.xbox-section {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 6.5rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.xbox-showcase-img {
+    filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.16));
+    max-height: 440px;
+    width: auto;
+}
+
+/* -------------------------------------------------------------
+   5. About Us Section (Dark Section)
+   ------------------------------------------------------------- */
+.about-section {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 6.5rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-punchline {
+    font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.12;
+    text-transform: capitalize;
+}
+
+/* -------------------------------------------------------------
+   6. Contact Us Section (White Section)
+   ------------------------------------------------------------- */
+.contact-section {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 6.5rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-punchline {
+    font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.12;
+    text-transform: capitalize;
+}

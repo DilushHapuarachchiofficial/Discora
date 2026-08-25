@@ -1,0 +1,121 @@
+/**
+ * Discora - Main Theme, Typography & Global Stylesheet
+ */
+
+:root {
+    --color-bg-dark: #000000;
+    --color-bg-dark-surface: #0a0b10;
+    --color-bg-card-dark: #12141c;
+    --color-bg-light: #ffffff;
+    --color-bg-light-subtle: #f8f9fa;
+    --color-text-dark: #111827;
+    --color-text-light: #f8fafc;
+    --color-text-muted: #8e95a5;
+    
+    --color-playstation: #00439c;
+    --color-playstation-accent: #0070d1;
+    --color-playstation-glow: rgba(0, 112, 209, 0.35);
+    
+    --color-xbox: #107c10;
+    --color-xbox-accent: #2ca22c;
+    --color-xbox-glow: rgba(16, 124, 16, 0.35);
+    
+    --font-heading: 'Rajdhani', sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    
+    --header-height: 80px;
+    --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Base Body */
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-light);
+    font-family: var(--font-body);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+body.nav-open {
+    overflow: hidden !important;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6,
+.font-heading,
+.section-title-large,
+.section-heading-badge {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    line-height: 1.15;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #000000;
+}
+::-webkit-scrollbar-thumb {
+    background: #272a38;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #3b3f54;
+}
+
+/* Alternating Section Background Helpers */
+.section-dark {
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-light);
+    position: relative;
+}
+
+.section-light {
+    background-color: var(--color-bg-light);
+    color: var(--color-text-dark);
+    position: relative;
+}
+
+/* Text Underline Accent in Reference Screenshot */
+.accent-underline {
+    position: relative;
+    display: inline-block;
+}
+
+.accent-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: currentColor;
+    border-radius: 2px;
+}
+
+/* Links & Transitions */
+a {
+    transition: var(--transition-smooth);
+}
+
+.hover-primary:hover {
+    color: var(--color-playstation-accent) !important;
+}
+
+.hover-light:hover {
+    color: #ffffff !important;
+}
+
+.hover-dark:hover {
+    color: #000000 !important;
+}
