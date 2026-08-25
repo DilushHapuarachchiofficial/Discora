@@ -1,0 +1,13 @@
+/**
+ * Discora - Cart & Checkout Stylesheet
+ */
+.summary-card {
+    background-color: var(--color-bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+}
+
+.table-cart td, .table-cart th {
+    vertical-align: middle;
+    border-color: rgba(255, 255, 255, 0.08);
+}

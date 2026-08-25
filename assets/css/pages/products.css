@@ -1,0 +1,478 @@
+/**
+ * Discora - Dynamic Product Catalog & Grid Stylesheet
+ * Premium Gaming Aesthetics, Custom Badges, Product Card Hover & Responsive Layouts
+ */
+
+/* =========================================================
+   1. Catalog Hero & Toolbar (Dark Theme Defaults)
+   ========================================================= */
+.catalog-hero {
+    border-radius: 1.25rem;
+    position: relative;
+    background: radial-gradient(circle at 10% 20%, rgba(0, 112, 209, 0.15) 0%, rgba(20, 20, 24, 0.95) 90%);
+}
+
+.catalog-toolbar {
+    background: rgba(22, 22, 28, 0.85);
+    backdrop-filter: blur(10px);
+}
+
+/* =========================================================
+   2. Product Cards Styling & Hover Interactions
+   ========================================================= */
+.product-card-col {
+    transition: transform 0.3s ease;
+}
+
+.product-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.35s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+}
+
+/* Image Showcase */
+.product-img-wrapper {
+    background: radial-gradient(circle at center, #ffffff 0%, #f8f9fa 100%);
+    border-bottom: 1px solid #f1f5f9;
+    padding: 1.75rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 260px;
+    position: relative;
+}
+
+.product-img {
+    max-height: 215px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.12));
+}
+
+.product-card:hover .product-img {
+    transform: scale(1.06) translateY(-4px);
+    filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.2));
+}
+
+/* Platform Badges */
+.badge-playstation {
+    background: linear-gradient(135deg, #003791, #0070d1) !important;
+    color: #fff !important;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 0.4rem 0.75rem;
+    border-radius: 50rem;
+}
+
+.badge-xbox {
+    background: linear-gradient(135deg, #0e7a0d, #107c41) !important;
+    color: #fff !important;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 0.4rem 0.75rem;
+    border-radius: 50rem;
+}
+
+.badge-new-arrival {
+    background: linear-gradient(135deg, #dc3545, #ff4757) !important;
+    color: #fff !important;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 0.3rem 0.6rem;
+    border-radius: 50rem;
+    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.4);
+}
+
+/* Wishlist Button */
+.btn-wishlist-toggle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #475569;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.25s ease;
+}
+
+.btn-wishlist-toggle:hover {
+    background: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+    transform: scale(1.12);
+}
+
+.btn-wishlist-toggle.active {
+    background: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+}
+
+.btn-wishlist-toggle.active i::before {
+    content: "\f415"; /* bi-heart-fill */
+}
+
+/* Product Card Typography & Layout */
+.text-truncate-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 2.7rem;
+    line-height: 1.35;
+}
+
+.hover-primary {
+    transition: color 0.2s ease;
+}
+
+.hover-primary:hover {
+    color: #0070d1 !important;
+}
+
+/* =========================================================
+   3. Sidebar Filters
+   ========================================================= */
+.filter-sidebar {
+    background: #141418;
+    position: sticky;
+    top: 90px;
+}
+
+.auth-checkbox .form-check-input {
+    background-color: #0d0d12;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.auth-checkbox .form-check-input:checked {
+    background-color: #0070d1;
+    border-color: #0070d1;
+}
+
+/* =========================================================
+   4. Pagination Custom Styling
+   ========================================================= */
+.pagination .page-link {
+    border-radius: 8px;
+    margin: 0 4px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.pagination .page-link:hover {
+    background: #0070d1 !important;
+    border-color: #0070d1 !important;
+    color: #fff !important;
+}
+
+
+/* =========================================================
+   5. NEW ARRIVALS PAGE - BRIGHT WHITE PURE BACKGROUND OVERALL
+   ========================================================= */
+
+/* Body Background Pure White Override */
+body.page-new-arrivals {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+}
+
+/* Main Page Container Backdrop */
+.new-arrivals-page-wrapper {
+    background-color: #ffffff !important;
+    color: #0f172a;
+    min-height: 100vh;
+}
+
+/* Hero Section Container */
+.new-arrivals-page-wrapper .new-arrivals-hero {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.75) 45%, rgba(15, 23, 42, 0.2) 100%), url('../../images/banners/new-arrivals-chars.png') no-repeat center right !important;
+    background-size: cover !important;
+    border: 1px solid #1e293b !important;
+    border-radius: 1.5rem !important;
+    position: relative;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1) !important;
+}
+
+.new-arrivals-page-wrapper .hero-title {
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.new-arrivals-page-wrapper .hero-subtitle {
+    color: #dc3545 !important;
+    font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.new-arrivals-page-wrapper .hero-desc {
+    line-height: 1.6;
+}
+
+/* Hero Background Decorative Shapes & Circular Disc Motifs */
+.new-arrivals-page-wrapper .hero-bg-shapes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.new-arrivals-page-wrapper .disc-shape {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px dashed rgba(220, 53, 69, 0.18);
+    background: radial-gradient(circle, rgba(220, 53, 69, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
+}
+
+.new-arrivals-page-wrapper .disc-shape-1 {
+    width: 380px;
+    height: 380px;
+    top: -100px;
+    right: -50px;
+}
+
+.new-arrivals-page-wrapper .disc-shape-2 {
+    width: 220px;
+    height: 220px;
+    bottom: -70px;
+    left: 35%;
+}
+
+.new-arrivals-page-wrapper .disc-shape-3 {
+    width: 140px;
+    height: 140px;
+    top: 20px;
+    left: -40px;
+}
+
+.new-arrivals-page-wrapper .hero-grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+/* Hero Physical Game Showcase Image */
+.new-arrivals-page-wrapper .hero-physical-disc-showcase {
+    position: relative;
+    display: inline-block;
+}
+
+.new-arrivals-page-wrapper .hero-physical-disc-showcase img {
+    max-height: 260px;
+    width: auto;
+    filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.15));
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.new-arrivals-page-wrapper .hero-physical-disc-showcase:hover img {
+    transform: translateY(-8px) scale(1.04) rotate(1.5deg);
+}
+
+/* Catalog Toolbar in Light Theme */
+.new-arrivals-page-wrapper .catalog-toolbar {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03) !important;
+}
+
+.new-arrivals-page-wrapper .catalog-toolbar label,
+.new-arrivals-page-wrapper .catalog-toolbar span {
+    color: #475569 !important;
+}
+
+.new-arrivals-page-wrapper .catalog-toolbar strong {
+    color: #0f172a !important;
+}
+
+.new-arrivals-page-wrapper .catalog-toolbar select {
+    background-color: #f8f9fa !important;
+    color: #0f172a !important;
+    border: 1px solid #cbd5e1 !important;
+}
+
+/* Sidebar Filters in Light Theme */
+.new-arrivals-page-wrapper .filter-sidebar {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 1rem !important;
+    color: #0f172a !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03) !important;
+}
+
+.new-arrivals-page-wrapper .filter-sidebar h5,
+.new-arrivals-page-wrapper .filter-sidebar h6 {
+    color: #0f172a !important;
+}
+
+.new-arrivals-page-wrapper .filter-sidebar .border-bottom,
+.new-arrivals-page-wrapper .filter-sidebar .border-top {
+    border-color: #e2e8f0 !important;
+}
+
+.new-arrivals-page-wrapper .filter-sidebar label {
+    color: #334155 !important;
+}
+
+.new-arrivals-page-wrapper .filter-sidebar .form-check-label:hover {
+    color: #0f172a !important;
+}
+
+.new-arrivals-page-wrapper .filter-sidebar .badge {
+    background-color: #f1f5f9 !important;
+    color: #475569 !important;
+    border: 1px solid #cbd5e1;
+}
+
+.new-arrivals-page-wrapper .filter-sidebar .input-group-text,
+.new-arrivals-page-wrapper .filter-sidebar input.form-control {
+    background-color: #f8f9fa !important;
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+}
+
+.new-arrivals-page-wrapper .filter-sidebar .form-check-input {
+    background-color: #ffffff;
+    border-color: #cbd5e1;
+}
+
+.new-arrivals-page-wrapper .filter-sidebar .form-check-input:checked {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* Product Cards in Light Theme */
+.new-arrivals-page-wrapper .product-card {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 1.25rem !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.35s ease !important;
+}
+
+.new-arrivals-page-wrapper .product-card:hover {
+    transform: translateY(-8px) !important;
+}
+
+/* Product Image Showcase Area inside Card */
+.new-arrivals-page-wrapper .product-img-wrapper {
+    background: radial-gradient(circle at center, #ffffff 0%, #f8f9fa 100%) !important;
+    border-bottom: 1px solid #f1f5f9;
+    padding: 1.75rem 1.25rem;
+    min-height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.new-arrivals-page-wrapper .product-img {
+    max-height: 215px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.12));
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+}
+
+.new-arrivals-page-wrapper .product-card:hover .product-img {
+    transform: scale(1.06) translateY(-4px);
+    filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.2));
+}
+
+/* Card Body Typography in Light Theme */
+.new-arrivals-page-wrapper .product-card .card-body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border-radius: 0 0 1.25rem 1.25rem;
+}
+
+.new-arrivals-page-wrapper .product-card .card-title,
+.new-arrivals-page-wrapper .product-card .card-title a {
+    color: #0f172a !important;
+    font-weight: 700;
+}
+
+.new-arrivals-page-wrapper .product-card .card-title a:hover {
+    color: #dc3545 !important;
+}
+
+.new-arrivals-page-wrapper .product-card small,
+.new-arrivals-page-wrapper .product-card .text-secondary {
+    color: #64748b !important;
+}
+
+.new-arrivals-page-wrapper .product-card .border-top {
+    border-color: #f1f5f9 !important;
+}
+
+.new-arrivals-page-wrapper .product-card span.fs-5 {
+    color: #0f172a !important;
+    font-weight: 800;
+}
+
+.new-arrivals-page-wrapper .product-card small.text-decoration-line-through {
+    color: #94a3b8 !important;
+}
+
+/* Light Theme Wishlist Toggle Button */
+.new-arrivals-page-wrapper .btn-wishlist-toggle {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #475569 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+}
+
+.new-arrivals-page-wrapper .btn-wishlist-toggle:hover,
+.new-arrivals-page-wrapper .btn-wishlist-toggle.active {
+    background: #dc3545 !important;
+    border-color: #dc3545 !important;
+    color: #ffffff !important;
+    transform: scale(1.12);
+}
+
+/* Offcanvas Drawer Light Styling */
+#mobileFilterOffcanvas {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+}
+
+#mobileFilterOffcanvas .offcanvas-header {
+    border-bottom: 1px solid #e2e8f0 !important;
+}
+
+#mobileFilterOffcanvas .btn-close {
+    filter: none !important;
+}
+
+/* Pagination Light Mode Styling */
+.new-arrivals-page-wrapper .pagination .page-link {
+    border-color: #e2e8f0 !important;
+}
+
+.new-arrivals-page-wrapper .pagination .page-link:hover {
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+    color: #ffffff !important;
+}
