@@ -80,7 +80,11 @@ $user = current_user();
                 <?php if (is_logged_in()): ?>
                     <div class="dropdown d-none d-sm-block">
                         <button class="btn btn-icon-link text-light p-1 dropdown-toggle dropdown-no-arrow" type="button" id="userMenuBtn" data-bs-toggle="dropdown" aria-expanded="false" title="<?= htmlspecialchars($user['name']) ?>">
-                            <i class="bi bi-person-circle fs-5 text-primary"></i>
+                            <?php if (!empty($user['avatar'])): ?>
+                                <img src="<?= BASE_URL . htmlspecialchars($user['avatar']) ?>" alt="Profile" class="rounded-circle" style="width: 24px; height: 24px; object-fit: cover; border: 1px solid #0d6efd;">
+                            <?php else: ?>
+                                <i class="bi bi-person-circle fs-5 text-primary"></i>
+                            <?php endif; ?>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark discora-dropdown-menu shadow" aria-labelledby="userMenuBtn">
                             <li class="px-3 py-2 border-bottom border-secondary border-opacity-25">
@@ -194,7 +198,11 @@ $user = current_user();
                 </a>
                 <?php if (is_logged_in()): ?>
                     <a href="<?= BASE_URL ?>account.php" class="btn btn-primary d-flex align-items-center justify-content-center gap-2 py-2">
-                        <i class="bi bi-person-circle"></i> <?= htmlspecialchars($user['name']) ?>
+                        <?php if (!empty($user['avatar'])): ?>
+                            <img src="<?= BASE_URL . htmlspecialchars($user['avatar']) ?>" alt="Profile" class="rounded-circle" style="width: 20px; height: 20px; object-fit: cover;"> <?= htmlspecialchars($user['name']) ?>
+                        <?php else: ?>
+                            <i class="bi bi-person-circle"></i> <?= htmlspecialchars($user['name']) ?>
+                        <?php endif; ?>
                     </a>
                     <a href="<?= BASE_URL ?>logout.php" class="btn btn-sm btn-outline-danger py-1 mt-1">Logout</a>
                 <?php else: ?>

@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             // Find user by email or username
             $stmt = $pdo->prepare("
-                SELECT u.user_id, u.role_id, u.full_name, u.username, u.email, u.password, u.status, r.role_name
+                SELECT u.user_id, u.role_id, u.full_name, u.username, u.email, u.password, u.status, u.avatar, u.is_superadmin, u.admin_permissions, r.role_name
                 FROM users u
                 JOIN roles r ON u.role_id = r.role_id
                 WHERE u.email = :email OR u.username = :username
@@ -82,6 +82,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_name'] = $user['full_name'];
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['user_role'] = strtolower($user['role_name']);
+            $_SESSION['user_avatar'] = $user['avatar'] ?? null;
+            $_SESSION['is_superadmin'] = (int)($user['is_superadmin'] ?? 0);
+            $_SESSION['admin_permissions'] = !empty($user['admin_permissions']) ? json_decode($user['admin_permissions'], true) : [];
 
             // If Remember Me selected, set secure cookie
             if ($remember) {

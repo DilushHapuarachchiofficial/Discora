@@ -31,7 +31,8 @@ function current_user(): ?array {
         'id'    => $_SESSION['user_id'] ?? null,
         'name'  => $_SESSION['user_name'] ?? 'User',
         'email' => $_SESSION['user_email'] ?? '',
-        'role'  => $_SESSION['user_role'] ?? 'customer'
+        'role'  => $_SESSION['user_role'] ?? 'customer',
+        'avatar'=> $_SESSION['user_avatar'] ?? null
     ];
 }
 
