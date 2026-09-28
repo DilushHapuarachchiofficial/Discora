@@ -1,0 +1,14 @@
+/**
+ * Discora - Admin Panel Styles
+ */
+#sidebar-wrapper .list-group-item:hover,
+#sidebar-wrapper .list-group-item.active {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    color: #0d6efd !important;
+}
+
+.admin-card-stat {
+    background-color: #141622;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+}
