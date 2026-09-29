@@ -87,6 +87,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $db->commit();
 
+        if ($raw_payment_method === 'card') {
+            // PayHere Integration setup
+            $merchant_id = '1238352';
+            $merchant_secret = 'MTA1ODA1NjgzMDI4OTAyNzI1ODEzNjU1NTE0OTE1MTA3NTg2ODEzMw==';
+            $currency = 'LKR';
+            $amount = number_format($total_amount, 2, '.', '');
+            $hash = strtoupper(md5($merchant_id . $order_id . $amount . $currency . strtoupper(md5($merchant_secret))));
+            
+            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+            $domain = $_SERVER['HTTP_HOST'];
+            $base_app_url = $protocol . $domain . BASE_URL;
+
+            $return_url = $base_app_url . 'order-success.php?id=' . $order_id;
+            $cancel_url = $base_app_url . 'checkout.php';
+            $notify_url = $base_app_url . 'actions/payhere-notify.php';
+            
+            $user_email = $_SESSION['user_email'] ?? 'customer@example.com';
+
+            echo '<form id="payhereForm" method="post" action="https://sandbox.payhere.lk/pay/checkout">';
+            echo '<input type="hidden" name="merchant_id" value="' . htmlspecialchars($merchant_id) . '">';
+            echo '<input type="hidden" name="return_url" value="' . htmlspecialchars($return_url) . '">';
+            echo '<input type="hidden" name="cancel_url" value="' . htmlspecialchars($cancel_url) . '">';
+            echo '<input type="hidden" name="notify_url" value="' . htmlspecialchars($notify_url) . '">';
+            echo '<input type="hidden" name="first_name" value="' . htmlspecialchars($shipping_name) . '">';
+            echo '<input type="hidden" name="last_name" value="">';
+            echo '<input type="hidden" name="email" value="' . htmlspecialchars($user_email) . '">';
+            echo '<input type="hidden" name="phone" value="' . htmlspecialchars($shipping_phone) . '">';
+            echo '<input type="hidden" name="address" value="' . htmlspecialchars($shipping_address) . '">';
+            echo '<input type="hidden" name="city" value="' . htmlspecialchars($shipping_city) . '">';
+            echo '<input type="hidden" name="country" value="Sri Lanka">';
+            echo '<input type="hidden" name="order_id" value="' . htmlspecialchars($order_id) . '">';
+            echo '<input type="hidden" name="items" value="Discora Order ' . htmlspecialchars($order_number) . '">';
+            echo '<input type="hidden" name="currency" value="' . htmlspecialchars($currency) . '">';
+            echo '<input type="hidden" name="amount" value="' . htmlspecialchars($amount) . '">';
+            echo '<input type="hidden" name="hash" value="' . htmlspecialchars($hash) . '">';
+            echo '</form>';
+            echo '<script>document.getElementById("payhereForm").submit();</script>';
+            exit;
+        }
+
         set_flash_message('success', 'Your order has been placed successfully!');
         redirect(BASE_URL . 'order-success.php?id=' . $order_id);
 
