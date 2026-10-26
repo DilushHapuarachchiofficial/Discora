@@ -67,11 +67,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
         <?php if (has_permission('invoices')): ?>
         <!-- Invoices -->
-        <li class="nav-item">
+        <!--<li class="nav-item">
             <a href="invoices.php" class="nav-link text-white <?= in_array($current_page, ['invoices.php', 'invoice.php']) ? 'active bg-primary bg-opacity-25 rounded' : '' ?>">
                 <i class="bi bi-receipt me-2"></i> <span>Invoices</span>
             </a>
-        </li>
+        </li> -->
         <?php endif; ?>
 
         <?php if (has_permission('reports')): ?>
