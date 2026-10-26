@@ -9,6 +9,12 @@ require_once dirname(__DIR__) . '/core/auth.php';
 
 require_login('login.php');
 
+if (is_admin()) {
+    set_flash_message('danger', 'Admin accounts cannot place orders.');
+    redirect(BASE_URL);
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_SESSION['user_id'];
     $shipping_name = sanitize_input($_POST['name'] ?? '');

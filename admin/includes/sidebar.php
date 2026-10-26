@@ -111,11 +111,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
         <?php if (has_permission('messages')): ?>
         <!-- Messages -->
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a href="messages.php" class="nav-link text-white <?= $current_page == 'messages.php' ? 'active bg-primary bg-opacity-25 rounded' : '' ?>">
                 <i class="bi bi-envelope me-2"></i> <span>Messages</span>
             </a>
-        </li>
+        </li> -->
         <?php endif; ?>
 
         <?php if (is_superadmin()): ?>

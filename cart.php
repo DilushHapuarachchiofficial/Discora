@@ -5,8 +5,14 @@
  */
 
 require_once __DIR__ . '/config/constants.php';
+require_once __DIR__ . '/core/auth.php';
 require_once __DIR__ . '/core/cart.php';
 require_once __DIR__ . '/core/functions.php';
+
+if (is_admin()) {
+    redirect(BASE_URL);
+    exit;
+}
 
 $page_title = "Your Shopping Cart";
 $page_css   = ['cart-checkout.css'];

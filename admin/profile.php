@@ -14,20 +14,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = trim($_POST['email'] ?? '');
         $current_password = $_POST['current_password'] ?? '';
         $new_password = $_POST['password'] ?? '';
+        $confirm_password = $_POST['confirm_password'] ?? '';
         
         if (empty($full_name) || empty($email)) {
             $error = 'Name and Email are required.';
         } else {
-            // If user wants to change password, verify current password first
-            if (!empty($new_password)) {
-                $stmt = $db->prepare("SELECT password FROM users WHERE user_id = ?");
-                $stmt->execute([$user_id]);
-                $db_pass = $stmt->fetchColumn();
-                
+            // If user wants to change password, verify current password and confirm password first
+            if (!empty($new_password) || !empty($confirm_password) || !empty($current_password)) {
                 if (empty($current_password)) {
                     $error = 'You must enter your current password to set a new password.';
-                } elseif (!password_verify($current_password, $db_pass)) {
-                    $error = 'The current password you entered is incorrect.';
+                } elseif (empty($new_password)) {
+                    $error = 'Please enter a new password.';
+                } elseif (empty($confirm_password)) {
+                    $error = 'Please confirm your new password.';
+                } elseif ($new_password !== $confirm_password) {
+                    $error = 'New password and Confirm password do not match.';
+                } elseif (strlen($new_password) < 6) {
+                    $error = 'New password must be at least 6 characters long.';
+                } else {
+                    $stmt = $db->prepare("SELECT password FROM users WHERE user_id = ?");
+                    $stmt->execute([$user_id]);
+                    $db_pass = $stmt->fetchColumn();
+                    
+                    if (!password_verify($current_password, $db_pass)) {
+                        $error = 'The current password you entered is incorrect.';
+                    }
                 }
             }
             
@@ -132,11 +143,16 @@ $admin = $stmt->fetch(PDO::FETCH_ASSOC);
                     
                     <div class="mb-3">
                         <label class="form-label text-secondary small fw-bold">Current Password</label>
-                        <input type="password" name="current_password" class="form-control" placeholder="Required only if changing password">
+                        <input type="password" name="current_password" id="current_password" class="form-control" placeholder="Required only if changing password">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-secondary small fw-bold">New Password</label>
+                        <input type="password" name="password" id="new_password" class="form-control" placeholder="Leave blank to keep current password">
                     </div>
                     <div class="mb-4">
-                        <label class="form-label text-secondary small fw-bold">New Password</label>
-                        <input type="password" name="password" class="form-control" placeholder="Leave blank to keep current password">
+                        <label class="form-label text-secondary small fw-bold">Confirm Password</label>
+                        <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm your new password">
+                        <div id="passwordMatchMsg" class="small mt-1"></div>
                     </div>
                     
                     <div class="text-end">
@@ -147,5 +163,42 @@ $admin = $stmt->fetch(PDO::FETCH_ASSOC);
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const newPass = document.getElementById('new_password');
+    const confirmPass = document.getElementById('confirm_password');
+    const matchMsg = document.getElementById('passwordMatchMsg');
+
+    function checkMatch() {
+        if (!confirmPass.value && !newPass.value) {
+            matchMsg.textContent = '';
+            confirmPass.classList.remove('is-valid', 'is-invalid');
+            return;
+        }
+        if (!confirmPass.value) {
+            matchMsg.textContent = '';
+            confirmPass.classList.remove('is-valid', 'is-invalid');
+            return;
+        }
+        if (newPass.value === confirmPass.value) {
+            matchMsg.textContent = '✓ Passwords match';
+            matchMsg.className = 'small mt-1 text-success fw-semibold';
+            confirmPass.classList.add('is-valid');
+            confirmPass.classList.remove('is-invalid');
+        } else {
+            matchMsg.textContent = '✗ Passwords do not match';
+            matchMsg.className = 'small mt-1 text-danger fw-semibold';
+            confirmPass.classList.add('is-invalid');
+            confirmPass.classList.remove('is-valid');
+        }
+    }
+
+    if (newPass && confirmPass) {
+        newPass.addEventListener('input', checkMatch);
+        confirmPass.addEventListener('input', checkMatch);
+    }
+});
+</script>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>

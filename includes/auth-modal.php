@@ -15,50 +15,23 @@
 
         <div class="auth-modal-grid">
             
-            <!-- Left Column: Gaming Visual & Brand Story -->
+            <!-- Left Column: Cinematic Gaming Showcase -->
             <div class="auth-visual-pane">
                 <div class="auth-visual-overlay"></div>
-                <div class="auth-visual-content">
+                <div class="auth-visual-content d-flex flex-column justify-content-between h-100">
                     
-                    <!-- Discora Logo (Centered & Enlarged) -->
-                    <div class="auth-brand-badge text-center mb-4">
+                    <!-- Discora Logo (Top) -->
+                    <div class="auth-brand-badge text-start mb-auto">
                         <img src="<?= ASSETS_PATH ?>images/logos/discora-logo.png" alt="Discora Logo" class="auth-brand-logo">
                     </div>
 
-                    <!-- Visual Headline & Badge -->
-                    <div class="auth-gaming-badge">
-                        <i class="bi bi-controller text-primary me-2"></i>
-                        <span>Physical Gaming Hub</span>
-                    </div>
-
-                    <h3 class="auth-visual-title font-heading">
-                        UNLOCK THE <span class="text-gradient-ps">ULTIMATE</span> GAMING VAULT
-                    </h3>
-
-                    <p class="auth-visual-desc">
-                        Your destination for authentic PlayStation & Xbox physical discs, next-gen hardware bundles, and collector editions.
-                    </p>
-
-                    <!-- Features Checklist -->
-                    <div class="auth-features-list">
-                        <div class="auth-feature-item">
-                            <i class="bi bi-disc-fill text-primary"></i>
-                            <span>100% Genuine Factory-Sealed Discs</span>
-                        </div>
-                        <div class="auth-feature-item">
-                            <i class="bi bi-truck text-success"></i>
-                            <span>Fast Island-wide Express Delivery</span>
-                        </div>
-                        <div class="auth-feature-item">
-                            <i class="bi bi-shield-check text-info"></i>
-                            <span>Exclusive Member Drops & Pre-Orders</span>
-                        </div>
-                    </div>
-
-                    <!-- Platform Badges Footer -->
-                    <div class="auth-visual-footer">
-                        <span class="platform-badge ps-badge"><i class="bi bi-playstation me-1"></i> PS5 / PS4</span>
-                        <span class="platform-badge xbox-badge"><i class="bi bi-xbox me-1"></i> Xbox Series X|S</span>
+                    <!-- Modern Glassmorphism Caption (Bottom) -->
+                    <div class="auth-visual-glass-card p-3 rounded-4 mt-auto">
+                        <span class="badge bg-primary bg-opacity-75 text-white rounded-pill px-3 py-1 mb-2">
+                            <i class="bi bi-controller me-1"></i> Physical Gaming Vault
+                        </span>
+                        <h4 class="text-white fw-bold font-heading mb-1">Your Next-Gen Game Hub</h4>
+                        <p class="text-light text-opacity-75 small mb-0">Original physical discs, consoles & exclusive gamer perks.</p>
                     </div>
                 </div>
             </div>
@@ -142,7 +115,7 @@
                     </form>
 
                     <!-- Switch to Register -->
-                    <div class="auth-switch-prompt mt-4 pt-3 text-center border-top border-secondary border-opacity-25">
+                    <div class="auth-switch-prompt mt-4 pt-3 text-center">
                         <span class="text-muted small">Don't have a Discora account?</span>
                         <button type="button" class="btn-switch-tab text-primary ms-1 fw-bold" id="goToRegisterBtn">
                             Create an Account
@@ -150,9 +123,9 @@
                     </div>
 
                     <!-- Quick Demo Credentials Hint (Ideal for Testing) -->
-                    <div class="demo-creds-box mt-3 p-2 rounded bg-black bg-opacity-50 border border-secondary border-opacity-25 text-center">
-                        <span class="small text-secondary d-block">Demo Customer: <code>alex@example.com</code> / <code>customer123</code></span>
-                        <span class="small text-secondary d-block">Demo Admin: <code>admin@discora.com</code> / <code>admin123</code></span>
+                    <div class="demo-creds-box mt-3 p-2 text-center">
+                        <span class="small d-block">Demo Customer: <code>alex@example.com</code> / <code>customer123</code></span>
+                        <span class="small d-block">Demo Admin: <code>admin@discora.com</code> / <code>admin123</code></span>
                     </div>
                 </div>
 
@@ -296,7 +269,7 @@
                     </form>
 
                     <!-- Switch to Login -->
-                    <div class="auth-switch-prompt mt-4 pt-3 text-center border-top border-secondary border-opacity-25">
+                    <div class="auth-switch-prompt mt-4 pt-3 text-center">
                         <span class="text-muted small">Already have a Discora account?</span>
                         <button type="button" class="btn-switch-tab text-primary ms-1 fw-bold" id="goToLoginBtn">
                             Log In Here

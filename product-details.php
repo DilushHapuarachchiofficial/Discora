@@ -207,7 +207,20 @@ require_once __DIR__ . '/includes/header.php';
 
                 <!-- Purchase Controls -->
                 <div class="purchase-controls-box mb-4">
-                    <?php if ($is_out_of_stock): ?>
+                    <?php if (function_exists('is_admin') && is_admin()): ?>
+                        <div class="alert alert-dark border border-secondary border-opacity-50 text-light rounded-4 p-3 d-flex align-items-center justify-content-between flex-wrap gap-3 mb-0 shadow-sm">
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="bi bi-shield-check text-warning fs-4"></i>
+                                <div>
+                                    <div class="fw-bold text-white">Store Preview Mode</div>
+                                    <div class="small text-secondary">Orders and Cart are disabled for Administrator accounts.</div>
+                                </div>
+                            </div>
+                            <a href="<?= ADMIN_URL ?>product-edit.php?id=<?= $product['product_id'] ?>" class="btn btn-warning text-dark fw-bold rounded-pill px-4">
+                                <i class="bi bi-pencil-square me-1"></i> Edit Product
+                            </a>
+                        </div>
+                    <?php elseif ($is_out_of_stock): ?>
                         <div class="alert alert-danger bg-dark border-danger text-light mb-0">
                             <i class="bi bi-slash-circle me-2"></i> This item is currently out of stock. Check back soon for restocks!
                         </div>

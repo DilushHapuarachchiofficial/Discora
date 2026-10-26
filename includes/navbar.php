@@ -68,13 +68,15 @@ $user = current_user();
                     <i class="bi bi-search fs-5"></i>
                 </button>
 
-                <!-- Cart Button -->
+                <!-- Cart Button (Hidden for Admin) -->
+                <?php if (!is_admin()): ?>
                 <a href="<?= BASE_URL ?>cart.php" class="btn btn-icon-link text-light p-1 position-relative" title="Shopping Cart" aria-label="Cart">
                     <i class="bi bi-cart3 fs-5"></i>
                     <span id="cart-badge-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-dark">
                         <?= $cart_count ?>
                     </span>
                 </a>
+                <?php endif; ?>
 
                 <!-- User Profile / Auth Button -->
                 <?php if (is_logged_in()): ?>
@@ -94,10 +96,11 @@ $user = current_user();
                             <?php if (is_admin()): ?>
                                 <li><a class="dropdown-item text-warning" href="<?= ADMIN_URL ?>"><i class="bi bi-speedometer2 me-2"></i>Admin Dashboard</a></li>
                                 <li><hr class="dropdown-divider"></li>
+                            <?php else: ?>
+                                <li><a class="dropdown-item" href="<?= BASE_URL ?>account.php"><i class="bi bi-person me-2"></i>My Profile</a></li>
+                                <li><a class="dropdown-item" href="<?= BASE_URL ?>orders.php"><i class="bi bi-bag-check me-2"></i>My Orders</a></li>
+                                <li><hr class="dropdown-divider"></li>
                             <?php endif; ?>
-                            <li><a class="dropdown-item" href="<?= BASE_URL ?>account.php"><i class="bi bi-person me-2"></i>My Profile</a></li>
-                            <li><a class="dropdown-item" href="<?= BASE_URL ?>orders.php"><i class="bi bi-bag-check me-2"></i>My Orders</a></li>
-                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item text-danger" href="<?= BASE_URL ?>logout.php"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
                         </ul>
                     </div>
@@ -192,18 +195,26 @@ $user = current_user();
         <!-- Mobile User & Cart Footers -->
         <div class="side-nav-footer pt-3 border-top border-secondary border-opacity-25 mt-3">
             <div class="d-grid gap-2">
+                <?php if (!is_admin()): ?>
                 <a href="<?= BASE_URL ?>cart.php" class="btn btn-outline-light d-flex align-items-center justify-content-between py-2">
                     <span><i class="bi bi-cart3 me-2"></i> Shopping Cart</span>
                     <span class="badge bg-danger rounded-pill"><?= $cart_count ?></span>
                 </a>
+                <?php endif; ?>
                 <?php if (is_logged_in()): ?>
-                    <a href="<?= BASE_URL ?>account.php" class="btn btn-primary d-flex align-items-center justify-content-center gap-2 py-2">
-                        <?php if (!empty($user['avatar'])): ?>
-                            <img src="<?= BASE_URL . htmlspecialchars($user['avatar']) ?>" alt="Profile" class="rounded-circle" style="width: 20px; height: 20px; object-fit: cover;"> <?= htmlspecialchars($user['name']) ?>
-                        <?php else: ?>
-                            <i class="bi bi-person-circle"></i> <?= htmlspecialchars($user['name']) ?>
-                        <?php endif; ?>
-                    </a>
+                    <?php if (is_admin()): ?>
+                        <a href="<?= ADMIN_URL ?>" class="btn btn-warning text-dark fw-bold d-flex align-items-center justify-content-center gap-2 py-2">
+                            <i class="bi bi-speedometer2"></i> Admin Dashboard
+                        </a>
+                    <?php else: ?>
+                        <a href="<?= BASE_URL ?>account.php" class="btn btn-primary d-flex align-items-center justify-content-center gap-2 py-2">
+                            <?php if (!empty($user['avatar'])): ?>
+                                <img src="<?= BASE_URL . htmlspecialchars($user['avatar']) ?>" alt="Profile" class="rounded-circle" style="width: 20px; height: 20px; object-fit: cover;"> <?= htmlspecialchars($user['name']) ?>
+                            <?php else: ?>
+                                <i class="bi bi-person-circle"></i> <?= htmlspecialchars($user['name']) ?>
+                            <?php endif; ?>
+                        </a>
+                    <?php endif; ?>
                     <a href="<?= BASE_URL ?>logout.php" class="btn btn-sm btn-outline-danger py-1 mt-1">Logout</a>
                 <?php else: ?>
                     <button type="button" class="btn btn-primary py-2 fw-semibold" data-auth-modal data-auth-tab="login">

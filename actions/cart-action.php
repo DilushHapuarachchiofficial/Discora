@@ -7,10 +7,15 @@ header('Content-Type: application/json; charset=utf-8');
 
 require_once dirname(__DIR__) . '/config/db.php';
 require_once dirname(__DIR__) . '/config/session.php';
+require_once dirname(__DIR__) . '/core/auth.php';
 require_once dirname(__DIR__) . '/core/cart.php';
 require_once dirname(__DIR__) . '/core/functions.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (is_admin()) {
+        echo json_encode(['success' => false, 'message' => 'Admin accounts cannot place orders or use cart.']);
+        exit;
+    }
     $action    = sanitize_input($_POST['action'] ?? '');
     $productId = (int)($_POST['product_id'] ?? 0);
     $quantity  = max(1, (int)($_POST['quantity'] ?? 1));

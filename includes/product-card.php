@@ -102,8 +102,12 @@ $wrapper_class = !empty($carousel_mode) ? 'carousel-item-wrapper' : 'col-6 col-m
                     <?php endif; ?>
                 </div>
 
-                <!-- Add to Cart Action -->
-                <?php if ($is_out_of_stock): ?>
+                <!-- Add to Cart Action / Admin View Action -->
+                <?php if (function_exists('is_admin') && is_admin()): ?>
+                    <a href="<?= $detail_url ?>" class="btn btn-outline-dark rounded-3 px-3 py-2 w-100 fw-bold text-center text-decoration-none" title="View Details">
+                        <i class="bi bi-eye me-1"></i> View Details
+                    </a>
+                <?php elseif ($is_out_of_stock): ?>
                     <button class="btn btn-sm btn-secondary rounded-3 px-3 py-2 disabled w-100" disabled title="Out of Stock">
                         <i class="bi bi-slash-circle me-1"></i> Sold Out
                     </button>
