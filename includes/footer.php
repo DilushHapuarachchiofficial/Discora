@@ -52,7 +52,7 @@
                 <h6 class="text-light text-uppercase fw-bold mb-3 font-heading tracking-wider">Xbox</h6>
                 <ul class="list-unstyled small d-flex flex-column gap-2">
                     <li><a href="<?= BASE_URL ?>xbox.php?platform=xbox-one" class="text-secondary text-decoration-none hover-light">Xbox One Games</a></li>
-                    <li><a href="<?= BASE_URL ?>xbox.php?platform=xbox-series" class="text-secondary text-decoration-none hover-light">Xbox Series X|S Games</a></li>
+                    <li><a href="<?= BASE_URL ?>xbox-series.php" class="text-secondary text-decoration-none hover-light">Xbox Series X|S Games</a></li>
                     <li><a href="<?= BASE_URL ?>#xbox" class="text-secondary text-decoration-none hover-light nav-scroll-link">Xbox Hardware Showcase</a></li>
                 </ul>
             </div>

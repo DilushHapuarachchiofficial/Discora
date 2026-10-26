@@ -25,7 +25,7 @@ $per_page   = 12;
 
 $filters = [
     'search'    => $search,
-    'platform'  => ['xbox-series-x-s', 'xbox-one'],
+    'platform'  => ['xbox-series-xs', 'xbox-series-x-s', 'xbox-one'],
     'category'  => $categories,
     'min_price' => $min_price,
     'max_price' => $max_price,

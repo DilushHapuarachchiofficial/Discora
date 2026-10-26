@@ -38,18 +38,36 @@ function get_filtered_products(array $filters = [], string $sort = 'newest', int
         $params[':search_plat']  = $searchParam;
     }
 
-    // 2. Platform Filter (Supports single slug/id or array of slugs)
+    // 2. Platform Filter (Supports single slug/id or array of slugs, with alias normalization)
     if (!empty($filters['platform'])) {
         $platforms = (array)$filters['platform'];
         $platPlaceholders = [];
-        foreach ($platforms as $idx => $plat) {
-            $keySlug = ":plat_slug_" . $idx;
-            $keyName = ":plat_name_" . $idx;
-            $keyId   = ":plat_id_" . $idx;
-            $platPlaceholders[] = "(pl.slug = $keySlug OR pl.platform_name = $keyName OR pr.platform_id = $keyId)";
-            $params[$keySlug] = $plat;
-            $params[$keyName] = $plat;
-            $params[$keyId]   = is_numeric($plat) ? (int)$plat : 0;
+        $pIdx = 0;
+        foreach ($platforms as $plat) {
+            $platStr = strtolower(trim((string)$plat));
+            $platVariants = [$plat];
+
+            // Normalize Xbox Series and console platform variations
+            if (in_array($platStr, ['xbox-series', 'xbox-series-xs', 'xbox-series-x-s', 'xbox-series-x', 'xbox-series-s', 'xbox series x|s', 'xbox series x/s'], true)) {
+                $platVariants = ['xbox-series-xs', 'xbox-series-x-s', 'xbox-series', 'Xbox Series X|S', 3];
+            } elseif (in_array($platStr, ['xbox-one', 'xboxone', 'xbox one'], true)) {
+                $platVariants = ['xbox-one', 'Xbox One', 4];
+            } elseif (in_array($platStr, ['ps5', 'playstation-5', 'playstation 5'], true)) {
+                $platVariants = ['ps5', 'PlayStation 5', 1];
+            } elseif (in_array($platStr, ['ps4', 'playstation-4', 'playstation 4'], true)) {
+                $platVariants = ['ps4', 'PlayStation 4', 2];
+            }
+
+            foreach ($platVariants as $variant) {
+                $keySlug = ":plat_slug_" . $pIdx;
+                $keyName = ":plat_name_" . $pIdx;
+                $keyId   = ":plat_id_" . $pIdx;
+                $platPlaceholders[] = "(pl.slug = $keySlug OR pl.platform_name = $keyName OR pr.platform_id = $keyId)";
+                $params[$keySlug] = (string)$variant;
+                $params[$keyName] = (string)$variant;
+                $params[$keyId]   = is_numeric($variant) ? (int)$variant : 0;
+                $pIdx++;
+            }
         }
         $where[] = '(' . implode(' OR ', $platPlaceholders) . ')';
     }
