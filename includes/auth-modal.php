@@ -124,8 +124,8 @@
 
                     <!-- Quick Demo Credentials Hint (Ideal for Testing) -->
                     <div class="demo-creds-box mt-3 p-2 text-center">
-                        <span class="small d-block">Demo Customer: <code>alex@example.com</code> / <code>customer123</code></span>
-                        <span class="small d-block">Demo Admin: <code>admin@discora.com</code> / <code>admin123</code></span>
+                        <span class="small d-block">Demo Customer: <code class="demo-cred-fill" data-email="alex@example.com" data-pass="customer123">alex@example.com</code> / <code class="demo-cred-fill" data-email="alex@example.com" data-pass="customer123">customer123</code></span>
+                        <span class="small d-block">Demo Admin: <code class="demo-cred-fill" data-email="admin@discora.com" data-pass="admin123">admin@discora.com</code> / <code class="demo-cred-fill" data-email="admin@discora.com" data-pass="admin123">admin123</code></span>
                     </div>
                 </div>
 

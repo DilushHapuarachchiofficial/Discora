@@ -83,7 +83,7 @@
 </footer>
 
 <!-- Discora Global Authentication Popup Modal -->
-<?php require_once INCLUDES_PATH . 'auth-modal.php'; ?>
+<?php if (empty($hide_auth_modal)) require_once INCLUDES_PATH . 'auth-modal.php'; ?>
 
 <!-- Bootstrap 5.3.3 JS Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

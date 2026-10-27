@@ -47,6 +47,29 @@
     opacity: 0;
 }
 
+/* Standalone Auth Page Wrapper & Card (for login.php & register.php) */
+.discora-auth-page-wrapper {
+    min-height: calc(100vh - 180px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3.5rem 1rem;
+    position: relative;
+    background: radial-gradient(circle at 50% 15%, rgba(13, 110, 253, 0.12) 0%, rgba(10, 14, 23, 0) 70%), #0a0e17;
+}
+
+.discora-auth-card {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    background-color: #ffffff;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: 24px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5), 0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin: 0 auto;
+}
+
 /* Close Button */
 .auth-modal-close {
     position: absolute;
@@ -447,7 +470,8 @@
    9. Responsive Design & Media Queries
    ------------------------------------------------------------- */
 @media (max-width: 991.98px) {
-    .discora-auth-modal {
+    .discora-auth-modal,
+    .discora-auth-card {
         max-width: 760px;
     }
     
@@ -473,7 +497,8 @@
         padding: 0.75rem;
     }
 
-    .discora-auth-modal {
+    .discora-auth-modal,
+    .discora-auth-card {
         max-width: 520px;
         max-height: 94vh;
         border-radius: 20px;
@@ -510,7 +535,8 @@
         padding: 0.5rem;
     }
 
-    .discora-auth-modal {
+    .discora-auth-modal,
+    .discora-auth-card {
         max-height: 96vh;
         border-radius: 16px;
     }
@@ -544,4 +570,14 @@
         height: 34px;
         font-size: 0.95rem;
     }
+}
+
+.demo-cred-fill {
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.demo-cred-fill:hover {
+    background-color: #0d6efd !important;
+    color: #ffffff !important;
 }

@@ -95,10 +95,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Determine redirect URL
             $redirect_url = strtolower($user['role_name']) === 'admin' ? ADMIN_URL : BASE_URL . 'index.php';
             
-            // Check if there was an intended redirect saved in session
-            if (!empty($_SESSION['redirect_after_login'])) {
+            // Prioritize intended redirect from POST, session, or GET
+            if (!empty($_POST['redirect'])) {
+                $redirect_url = sanitize_input($_POST['redirect']);
+            } elseif (!empty($_SESSION['redirect_after_login'])) {
                 $redirect_url = $_SESSION['redirect_after_login'];
                 unset($_SESSION['redirect_after_login']);
+            } elseif (!empty($_GET['redirect'])) {
+                $redirect_url = sanitize_input($_GET['redirect']);
             }
 
             send_auth_response(true, 'Welcome back, ' . $user['full_name'] . '!', $redirect_url, $is_ajax);
@@ -200,7 +204,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_email'] = $email;
             $_SESSION['user_role']  = 'customer';
 
-            send_auth_response(true, 'Account created successfully! Welcome to Discora, ' . $full_name . '.', BASE_URL . 'index.php', $is_ajax);
+            $reg_redirect = BASE_URL . 'index.php';
+            if (!empty($_POST['redirect'])) {
+                $reg_redirect = sanitize_input($_POST['redirect']);
+            } elseif (!empty($_SESSION['redirect_after_login'])) {
+                $reg_redirect = $_SESSION['redirect_after_login'];
+                unset($_SESSION['redirect_after_login']);
+            } elseif (!empty($_GET['redirect'])) {
+                $reg_redirect = sanitize_input($_GET['redirect']);
+            }
+
+            send_auth_response(true, 'Account created successfully! Welcome to Discora, ' . $full_name . '.', $reg_redirect, $is_ajax);
 
         } catch (PDOException $e) {
             send_auth_response(false, 'Registration error: ' . $e->getMessage(), null, $is_ajax);

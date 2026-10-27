@@ -116,9 +116,19 @@ require_once __DIR__ . '/includes/header.php';
                         <span>Estimated Total</span>
                         <span class="text-primary font-heading fs-4" id="cartTotalText"><?= format_price($total) ?></span>
                     </div>
-                    <a href="<?= BASE_URL ?>checkout.php" class="btn btn-primary btn-lg w-100 rounded-pill font-heading tracking-wider py-3 shadow">
-                        PROCEED TO CHECKOUT <i class="bi bi-arrow-right ms-1"></i>
-                    </a>
+                    <?php if (is_logged_in()): ?>
+                        <a href="<?= BASE_URL ?>checkout.php" class="btn btn-primary btn-lg w-100 rounded-pill font-heading tracking-wider py-3 shadow">
+                            PROCEED TO CHECKOUT <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
+                    <?php else: ?>
+                        <a href="<?= BASE_URL ?>login.php?redirect=<?= urlencode(BASE_URL . 'checkout.php') ?>" 
+                           class="btn btn-primary btn-lg w-100 rounded-pill font-heading tracking-wider py-3 shadow"
+                           data-auth-modal 
+                           data-auth-tab="login" 
+                           data-auth-redirect="<?= BASE_URL ?>checkout.php">
+                            PROCEED TO CHECKOUT <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // -------------------------------------------------------------
     // 6. GSAP Modal Open & Close Animations
     // -------------------------------------------------------------
-    window.openDiscoraAuthModal = function(tab = 'login') {
+    window.openDiscoraAuthModal = function(tab = 'login', redirectUrl = null) {
         isModalOpen = true;
         isTransitioning = false;
         document.body.style.overflow = 'hidden';
@@ -136,6 +136,21 @@ document.addEventListener('DOMContentLoaded', () => {
         setInitialTab(tab);
         clearValidationErrors(loginForm);
         clearValidationErrors(registerForm);
+
+        // Inject redirect URL into forms if provided
+        if (redirectUrl) {
+            [loginForm, registerForm].forEach(f => {
+                if (!f) return;
+                let redirectInput = f.querySelector('input[name="redirect"]');
+                if (!redirectInput) {
+                    redirectInput = document.createElement('input');
+                    redirectInput.type = 'hidden';
+                    redirectInput.name = 'redirect';
+                    f.appendChild(redirectInput);
+                }
+                redirectInput.value = redirectUrl;
+            });
+        }
 
         if (!overlay || !modal) return;
         overlay.classList.add('active');
@@ -314,8 +329,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Attach click triggers to all account buttons/links on the page
-    document.querySelectorAll('[data-auth-modal], a[href$="login.php"], a[href$="register.php"]').forEach(trigger => {
+    document.querySelectorAll('[data-auth-modal], a[href*="login.php"], a[href*="register.php"]').forEach(trigger => {
         trigger.addEventListener('click', function(e) {
+            // If on standalone auth page, let page handle its forms
+            if (document.body.classList.contains('auth-page')) {
+                return;
+            }
+
             const href = this.getAttribute('href');
             if (href && (href.includes('account.php') || href.includes('orders.php') || href.includes('logout.php'))) {
                 return;
@@ -325,7 +345,33 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetTab = (this.getAttribute('data-auth-tab') === 'register' || (href && href.includes('register.php'))) 
                 ? 'register' 
                 : 'login';
-            window.openDiscoraAuthModal(targetTab);
+            const targetRedirect = this.getAttribute('data-auth-redirect') || 
+                                   this.getAttribute('data-redirect') || 
+                                   (href && href.includes('redirect=') ? decodeURIComponent(href.split('redirect=')[1]) : null);
+            window.openDiscoraAuthModal(targetTab, targetRedirect);
+        });
+    });
+
+    // Demo credentials quick autofill click handler
+    document.querySelectorAll('.demo-creds-box').forEach(box => {
+        box.addEventListener('click', function(e) {
+            const fillTarget = e.target.closest('.demo-cred-fill') || e.target.closest('code');
+            if (!fillTarget) return;
+            const targetText = fillTarget.textContent.trim();
+            const emailInput = document.getElementById('loginEmail');
+            const passInput = document.getElementById('loginPassword');
+            if (!emailInput || !passInput) return;
+
+            if (targetText.includes('admin') || fillTarget.getAttribute('data-email')?.includes('admin')) {
+                emailInput.value = 'admin@discora.com';
+                passInput.value = 'admin123';
+                showAlert('success', 'Admin demo credentials filled! Click SIGN IN to continue.');
+            } else {
+                emailInput.value = 'alex@example.com';
+                passInput.value = 'customer123';
+                showAlert('success', 'Customer demo credentials filled! Click SIGN IN to continue.');
+            }
+            clearValidationErrors(loginForm);
         });
     });
 

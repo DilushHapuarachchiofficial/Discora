@@ -41,6 +41,7 @@ function current_user(): ?array {
  */
 function require_login(string $redirect_to = 'login.php'): void {
     if (!is_logged_in()) {
+        $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'] ?? (BASE_URL . 'checkout.php');
         set_flash_message('warning', 'Please login to access that page.');
         redirect(BASE_URL . $redirect_to);
     }
