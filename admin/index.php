@@ -39,11 +39,24 @@ try {
     ");
     $recent_orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Sales by Date (Last 7 Days) for Chart
+    // Sales by Date for Dashboard Chart (supports ?chart_range=7d / 30d / this_month)
+    $chart_range = $_GET['chart_range'] ?? '7d';
+    if ($chart_range === '30d') {
+        $interval = 30;
+        $range_title = "Last 30 Days";
+    } elseif ($chart_range === 'this_month') {
+        $interval = max(1, (int)date('j'));
+        $range_title = "This Month";
+    } else {
+        $chart_range = '7d';
+        $interval = 7;
+        $range_title = "Last 7 Days";
+    }
+
     $stmt = $db->query("
         SELECT DATE(order_date) as date, SUM(total_amount) as daily_sales
         FROM orders
-        WHERE order_date >= DATE(NOW()) - INTERVAL 7 DAY
+        WHERE order_date >= DATE(NOW()) - INTERVAL $interval DAY
         GROUP BY DATE(order_date)
         ORDER BY DATE(order_date) ASC
     ");
@@ -105,8 +118,21 @@ try {
     <!-- Chart -->
     <div class="col-lg-8">
         <div class="card h-100">
-            <div class="card-header bg-white border-bottom-0 pt-4 pb-0">
-                <h6 class="fw-bold mb-0">Sales Overview (Last 7 Days)</h6>
+            <div class="card-header bg-white border-bottom-0 pt-4 pb-2 d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2">
+                <div>
+                    <h6 class="fw-bold mb-0">Sales Overview (<?= htmlspecialchars($range_title) ?>)</h6>
+                    <small class="text-muted">Daily performance snapshot</small>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <div class="btn-group btn-group-sm">
+                        <a href="index.php?chart_range=7d" class="btn btn-outline-secondary <?= $chart_range === '7d' ? 'active' : '' ?>">7D</a>
+                        <a href="index.php?chart_range=30d" class="btn btn-outline-secondary <?= $chart_range === '30d' ? 'active' : '' ?>">30D</a>
+                        <a href="index.php?chart_range=this_month" class="btn btn-outline-secondary <?= $chart_range === 'this_month' ? 'active' : '' ?>">Month</a>
+                    </div>
+                    <a href="reports.php" class="btn btn-sm btn-primary d-flex align-items-center gap-1 shadow-sm">
+                        <i class="bi bi-graph-up"></i> Reports & Filter
+                    </a>
+                </div>
             </div>
             <div class="card-body d-flex flex-column justify-content-end" style="min-height: 300px;">
                 <?php if (empty($sales_data)): ?>
